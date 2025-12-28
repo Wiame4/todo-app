@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App | Gestion de tâches</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="assets/icons/check.svg">
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <h1><i class="fas fa-tasks"></i> Todo App</h1>
+            <p class="subtitle">Gérez vos tâches efficacement</p>
+        </header>
+
+        <main class="app-main">
+            <section class="add-task-section">
+                <div class="input-group">
+                    <input 
+                        type="text" 
+                        id="taskInput" 
+                        placeholder="Ajouter une nouvelle tâche..." 
+                        maxlength="100"
+                        autocomplete="off"
+                    >
+                    <button id="addTaskBtn" class="btn-primary">
+                        <i class="fas fa-plus"></i> Ajouter
+                    </button>
+                </div>
+                <div class="task-counter">
+                    <span id="totalTasks">0 tâche(s)</span>
+                    <span id="completedTasks">0 terminée(s)</span>
+                </div>
+            </section>
+
+            <section class="filter-section">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">
+                        <i class="fas fa-list"></i> Toutes
+                    </button>
+                    <button class="filter-btn" data-filter="active">
+                        <i class="fas fa-clock"></i> En cours
+                    </button>
+                    <button class="filter-btn" data-filter="completed">
+                        <i class="fas fa-check-circle"></i> Terminées
+                    </button>
+                </div>
+                <div class="sort-options">
+                    <label for="sortSelect">Trier par :</label>
+                    <select id="sortSelect">
+                        <option value="date-desc">Date (récent)</option>
+                        <option value="date-asc">Date (ancien)</option>
+                        <option value="name-asc">Nom (A-Z)</option>
+                        <option value="name-desc">Nom (Z-A)</option>
+                    </select>
+                </div>
+            </section>
+
+            <section class="tasks-section">
+                <h2><i class="fas fa-clipboard-list"></i> Liste des tâches</h2>
+                <div id="tasksContainer" class="tasks-container">
+                    <div class="empty-state">
+                        <i class="fas fa-clipboard-check"></i>
+                        <p>Vous n'avez aucune tâche pour le moment</p>
+                        <p class="empty-state-sub">Commencez par ajouter une tâche ci-dessus</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="actions-section">
+                <button id="clearCompletedBtn" class="btn-secondary">
+                    <i class="fas fa-trash"></i> Supprimer les terminées
+                </button>
+                <button id="clearAllBtn" class="btn-danger">
+                    <i class="fas fa-broom"></i> Tout supprimer
+                </button>
+                <div class="theme-toggle">
+                    <span>Mode sombre</span>
+                    <label class="switch">
+                        <input type="checkbox" id="themeToggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </section>
+        </main>
+
+        <footer class="app-footer">
+            <p>Todo App &copy; 2025 - Développé avec <i class="fas fa-heart"></i> par Wiame</p>
+            <p class="tech-stack">
+                <span class="tech">HTML5</span>
+                <span class="tech">CSS3</span>
+                <span class="tech">JavaScript ES6</span>
+                <span class="tech">LocalStorage API</span>
+            </p>
+        </footer>
+    </div>
+
+    <!-- Modal pour l'édition de tâche -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-edit"></i> Modifier la tâche</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="editTaskInput" placeholder="Modifier la tâche..." maxlength="100">
+                <div class="modal-actions">
+                    <button id="saveEditBtn" class="btn-primary">Enregistrer</button>
+                    <button id="cancelEditBtn" class="btn-secondary">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation modal -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content confirm-modal">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle"></i> Confirmation</h3>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">Êtes-vous sûr de vouloir effectuer cette action ?</p>
+                <div class="modal-actions">
+                    <button id="confirmActionBtn" class="btn-danger">Confirmer</button>
+                    <button id="cancelActionBtn" class="btn-secondary">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
