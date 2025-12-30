@@ -32,8 +32,6 @@ todo-app/
 ├── style.css           # Styles CSS
 ├── app.js              # Logique JavaScript
 ├── README.md           # Documentation
-└── assets/             # Ressources statiques
-    └── icons/          # Icônes (favicon)
 ```
 
 ## 🛠️ Installation et utilisation
